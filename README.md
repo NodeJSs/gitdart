@@ -1,6 +1,10 @@
 # Gitdart
 Gitdart is a cli app that fetches information about github users
 
+## Installing Gitdart
+   ```
+    pub global activate -sgit https://github.com/NodeJSs/gitdart.git
+   ```
 ## Using Gitdart
 1. Fetching a single user
     ```
