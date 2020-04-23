@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:gitdart/fetchUserData.dart';
+import 'package:gitdart/utils/fetchUserData.dart';
 import 'package:gitdart/models/User.dart';
 
 void gitdartCli(String users){

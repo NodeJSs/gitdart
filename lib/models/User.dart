@@ -22,6 +22,16 @@ class User{
     this.following = json["following"];
     this.followers = json["followers"];
     this.bio = json["bio"];
-    this.publicRepos = json["public_repos"];
+    this.publicRepos = json["public_repos"] ?? json["publicRepos"];
+  }
+
+  Map<String, dynamic> toJson(){
+    return {
+      "name": this.name,
+      "bio": this.bio,
+      "following": this.following,
+      "followers": this.followers,
+      "publicRepos": this.publicRepos
+    };
   }
 }
