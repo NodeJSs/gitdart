@@ -11,6 +11,7 @@ void gitdartCli(String users){
   var userCount = 1;
   for(var username in _users){
     fetchUserData(username).then((User user){
+      _cacher.writeNewUserToCache(username, user);
       stdout.writeln("User #${(userCount).toString()}");
       stdout.writeln("Username: ${username}"); 
       stdout.writeln("Name: ${user.name}"); 
@@ -21,7 +22,7 @@ void gitdartCli(String users){
       stdout.writeln("Following: ${user.following}"); 
       stdout.writeln("  ");
       userCount = userCount+1;
-      _cacher.writeNewUserToCache(username, user);
+      
     });
     
   }
