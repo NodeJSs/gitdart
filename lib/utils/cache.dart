@@ -22,12 +22,12 @@ class Cacher {
   File _cacheFile = new File(_cacheFilePath);
 
   Cacher() {
-    _cacheFile.exists().then((bool doesFileExist) {
-      if (doesFileExist == false) {
-        _cacheFile.createSync(recursive: true);
-        _cacheFile.writeAsStringSync("{}");
-      }
-    });
+    try {
+      _cacheFile.writeAsStringSync("{}");
+    } on FileSystemException {
+      _cacheFile.createSync(recursive: true);
+      _cacheFile.writeAsStringSync("{}");
+    }
   }
 
   void writeNewUserToCache(String username, User user) async {
@@ -43,7 +43,7 @@ class Cacher {
     _cacheFile.writeAsString(jsonEncode(_results), mode: FileMode.write);
   }
 
-  Future<User> readResultFromCache(String username) async{
+  Future<User> readResultFromCache(String username) async {
     String _fileContents = await _cacheFile.readAsString();
     Map<String, dynamic> _results = await jsonDecode(_fileContents);
     if (_results[username] != null) {
