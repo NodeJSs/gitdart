@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:gitdart/utils/cache.dart';
 import 'package:gitdart/utils/fetchUserData.dart';
 import 'package:gitdart/models/User.dart';
 
 void gitdartCli(String users){
+  Cacher _cacher = new Cacher();
   List<String> _users = users.split(",");
   stdout.writeln("Fetching user(s)...");
   var userCount = 1;
@@ -19,6 +21,7 @@ void gitdartCli(String users){
       stdout.writeln("Following: ${user.following}"); 
       stdout.writeln("  ");
       userCount = userCount+1;
+      _cacher.writeNewUserToCache(username, user);
     });
     
   }

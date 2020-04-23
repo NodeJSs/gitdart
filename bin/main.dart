@@ -21,7 +21,7 @@ void main(List<String> arguments){
     publicRepos: 10,
     bio: "A man of the world"
   )); 
-  //gitdartCli(argResults['user']);
+  gitdartCli(argResults['user']);
 
 
 }

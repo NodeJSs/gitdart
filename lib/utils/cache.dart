@@ -46,7 +46,7 @@ class Cacher {
   Future<User> readResultFromCache(String username) async{
     String _fileContents = await _cacheFile.readAsString();
     Map<String, dynamic> _results = await jsonDecode(_fileContents);
-    if (_results[username]) {
+    if (_results[username] != null) {
       return await User.fromJson(_results[username]);
     }
     return null;

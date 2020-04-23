@@ -8,16 +8,15 @@ import 'package:http/http.dart' as http;
 Future<User> fetchUserData(String username) async {
   Cacher _cacher = new Cacher();
   var url = "https://api.github.com/users/${username}";
-  var _resultsFromCache = _cacher.readResultFromCache(username);
+  var _resultsFromCache = await _cacher.readResultFromCache(username);
   if (_resultsFromCache != null) {
     return _resultsFromCache;
+  }
+  var response = await http.get(url);
+  if (response.statusCode == 200) {
+    var jsonResponse = jsonDecode(response.body);
+    return User.fromJson(jsonResponse);
   } else {
-    var response = await http.get(url);
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      return User.fromJson(jsonResponse);
-    } else {
-      stderr.writeln("error fetching user: $username");
-    }
+    stderr.writeln("error fetching user: $username");
   }
 }
